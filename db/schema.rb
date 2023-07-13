@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_12_153637) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_13_155102) do
+  create_table "posts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "subreddit_id", null: false
+    t.string "title"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subreddit_id"], name: "index_posts_on_subreddit_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "subreddits", force: :cascade do |t|
+    t.string "title"
+    t.text "sidebar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "password"
@@ -19,4 +37,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_12_153637) do
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
+  add_foreign_key "posts", "subreddits"
+  add_foreign_key "posts", "users"
 end
