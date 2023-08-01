@@ -19,7 +19,11 @@ class SubredditsController < ApplicationController
   end
 
   def show
-    @subreddit = Subreddit.find(params[:id])
+    if params[:title]
+      @subreddit = Subreddit.find_by(title: params[:title])
+    else
+      @subreddit = Subreddit.find(params[:id])
+    end
   end
 
   private
