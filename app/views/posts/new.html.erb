@@ -1,0 +1,32 @@
+<h1>New Post</h1>
+<%= form_with model: @post do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+    <% @post.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %><br>
+    <% @post.errors.full_messages_for(:body).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+      <%= form.label :user_id %><br>
+      <%= form.collection_select :user_id, User.all, :id, :name %>
+  </div>
+
+  <div>
+      <%= form.label :subreddit_id %><br>
+      <%= form.collection_select :subreddit_id, Subreddit.all, :id, :title %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

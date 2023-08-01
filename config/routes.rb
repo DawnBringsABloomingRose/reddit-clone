@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   resources :users, except: [:index]
+  resources :posts
   resources :subreddits, path: 'r', path_names: {index: 'all'} do
-    resources :posts, only: [:index]
+    resources :posts, except: [:new]
   end
 
   root "users#new"

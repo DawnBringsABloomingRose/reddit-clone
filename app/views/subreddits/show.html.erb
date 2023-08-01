@@ -1,0 +1,6 @@
+<h1><%= @subreddit.title %></h1>
+<p> <%= @subreddit.sidebar %></p>
+<p><%= link_to "New Post", new_post_path %></p>
+
+<h2>Posts</h2>
+<%= render @subreddit.posts %>
